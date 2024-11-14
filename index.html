@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishanu Srium - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --royal-blue: rgb(0,0,20);
+            --wine-red: #8b1e3f;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        /* Header Styles */
+        header {
+            background: rgb(0, 0, 20);
+            color: var(--white);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--wine-red);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        /* Hero Section */
+#home {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: url("assets/images/hero-bg.jpg");
+    background-size: cover; /* Ensure the image covers the section */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    color: var(--white);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .typewriter {
+            min-height: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: var(--wine-red);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .resume-download-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .resume-download-btn:hover {
+      background-color: #45a049;
+    }
+
+    .resume-download-btn i {
+      margin-right: 8px;
+    }
+
+        /* Projects Section */
+        #projects {
+            padding: 5rem 2rem;
+            background-color: var(--light-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--royal-blue);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-image{
+            transform: scale(1.05);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .image-loading {
+            position: relative;
+            background: #f0f0f0;
+        }
+
+        .image-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Image error fallback */
+        .image-error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.875rem;
+            padding: 1rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            color: var(--royal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+
+        .skill-bars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-bar {
+    background: var(--light-gray);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    height: 30px;
+}
+
+.skill-progress {
+    background: var(--royal-blue);
+    height: 100%;
+    width: 0; /* Start at 0 width */
+    transition: width 1s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0; /* Keep progress bar below text */
+}
+
+.skill-info {
+    position: relative; /* Keeps info centered in the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 1rem;
+    z-index: 1;
+    color: var(--white);
+}
+
+
+        /* Contact Section */
+        #contact {
+            padding: 5rem 2rem;
+            background-color: var(--royal-blue);
+            color: var(--white);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--wine-red);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--royal-blue);
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Add styles for About section */
+        #about {
+            padding: 8rem 2rem 5rem;
+            background-color: var(--white);
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-content {
+            padding: 2rem;
+        }
+
+        .about-content h2 {
+            color: var(--royal-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .skill-bars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-bar {
+    background: var(--light-gray);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    height: 30px;
+}
+
+.skill-progress {
+    background: var(--royal-blue); /* Ensure this variable is defined or replace it with a color code */
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: width 1s ease-in-out;
+    z-index: 0; /* Keeps progress bar below text */
+}
+
+.skill-info {
+    position: relative; /* Changed from absolute to keep it within the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 1rem;
+    z-index: 1;
+    color: var(--white); /* Ensures text color contrast */
+}
+
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 300px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">KS</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm Krishanu Srium</h1>
+            <div class="typewriter"></div>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-container">
+            <div class="image-loading">
+                <img 
+                    src="./assets/images//KrishanuProfilePicture.jpg"
+                    alt="Krishanu Srium"
+                    class="about-image"
+                    onload="handleImageLoad(this)"
+                    onerror="handleImageError(this)"
+                >
+                <a href="https://drive.google.com/file/d/1xhYnAJS3U6c8dton9H4sNecUl9fJIsxb/view?usp=drive_link/Resume - 4th October.pdf" class="resume-download-btn" download>
+                    <i class="fa fa-download"></i> Download Resume
+                  </a>
+            </div>
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>Hello! I'm <span style="color: red;"><b>Krishanu Srium</b></span>, a passionate Data Science enthusiast and the Chairperson of the VIT Trekking Club. I combine my love for technology with a deep appreciation for nature and outdoor adventures.</p>
+                <p>With a strong foundation in machine learning and artificial intelligence, I've worked on various projects involving computer vision and data analysis. My goal is to leverage technology to solve real-world problems and make a positive impact.</p>
+                <p>As the leader of the trekking club, I've developed strong organizational and leadership skills while fostering a community of outdoor enthusiasts. This unique combination of technical expertise and leadership experience sets me apart in the field of data science.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects section update -->
+    <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            <!-- Projects will be dynamically added here -->
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <!-- Skill bars will be dynamically added here -->
+        </div>
+    </section>
+
+    
+   
+    <section id="contact">
+        <h2 class="section-title" style="color: #f5f5f5;">Contact Me</h1>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://linkedin.com/in/krishanu-srium"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Krishanu-Srium"><i class="fab fa-github"></i></a>
+            <a href=""><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2024 Krishanu Srium. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Typewriter Effect
+const typewriterTexts = [
+    "Chairperson of VIT Trekking Club",
+    "Data and Tech Enthusiast",
+    "Aspiring Data Scientist"
+];
+let currentTextIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let typingDelay = 200;
+
+function typeWriter() {
+    const typewriterElement = document.querySelector('.typewriter');
+    const currentText = typewriterTexts[currentTextIndex];
+
+    if (isDeleting) {
+        typewriterElement.textContent = currentText.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+    } else {
+        typewriterElement.textContent = currentText.substring(0, currentCharIndex + 1);
+        currentCharIndex++;
+    }
+
+    if (!isDeleting && currentCharIndex === currentText.length) {
+        isDeleting = true;
+        typingDelay = 2000;
+    } else if (isDeleting && currentCharIndex === 0) {
+        isDeleting = false;
+        currentTextIndex = (currentTextIndex + 1) % typewriterTexts.length;
+        typingDelay = 200;
+    }
+
+    setTimeout(typeWriter, isDeleting ? 100 : typingDelay);
+}
+
+// Image Loading Helper Functions
+function handleImageLoad(img) {
+    img.parentElement.classList.remove('image-loading');
+}
+function handleImageError(img) {
+    img.parentElement.classList.remove('image-loading');
+    img.parentElement.classList.add('image-error');
+    img.parentElement.innerHTML = `
+        <div class="image-error">
+            <i class="fas fa-image"></i>
+            <span>Image not available</span>
+        </div>
+    `;
+}
+
+// Projects Data and Card Creation
+const projects = [
+    {
+        title: "Object Detection using YOLO v3",
+        description: "Real-time object detection using YOLO v3, designed to recognize vehicles via webcam feed.",
+        image: "./assets/images/projects/yolo-detection.jpg",
+        github: "https://github.com/Krishanu-Srium/Yolo-V3",
+        demo: "#"
+    },
+    {
+        title: "Skin Disease Detection using CCT and VGG",
+        description: "Dual-model classifier leveraging Compact Convolutional Transformer (CCT) and VGG16 to accurately detect skin conditions.",
+        image: "./assets/images/projects/skin-disease.jpg",
+        github: "https://github.com/Krishanu-Srium/Skin-Disease-Classifier-Using-VGG-and-CCT",
+        demo: "#"
+    },
+    {
+        title: "Pothole Detection using VGG18",
+        description: "Automated pothole and speed hump detection using VGG18 from dashcam footage for road safety enhancement.",
+        image: "./assets/images/projects/pothole-detection.jpg",
+        github: "https://github.com/Krishanu-Srium/Pothole-Detectioin-Using-Compact-Convolutional-Transformer",
+        demo: "#"
+    },
+    {
+        title: "Flight Booking Software Prototype",
+        description: "End-to-end flight booking solution with predictive features and an intuitive UI/UX design.",
+        image: "./assets/images/projects/flight-booking.jpg",
+        github: "https://www.figma.com/design/mEGgrZpypHHBomuemjhzXL/FLYFAIR-UI%2FUX?t=68K7mjP6Cb8dc2P4-0",
+        demo: "#"
+    }
+];
+function createProjectCard(project) {
+    const projectCard = document.createElement('div');
+    projectCard.className = 'project-card';
+    projectCard.innerHTML = `
+        <div class="project-image-container image-loading">
+            <img 
+                src="${project.image}" 
+                alt="${project.title}"
+                class="project-image"
+                onload="handleImageLoad(this)"
+                onerror="handleImageError(this)"
+            >
+        </div>
+        <div class="project-content">
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+            <div class="project-links">
+                <a href="${project.github}" class="btn btn-primary" target="_blank">GitHub</a>
+            </div>
+        </div>
+    `;
+    return projectCard;
+}
+
+// Skills Data and Animation
+const skillCategories = [
+    {
+        name: "Programming Languages",
+        skills: [
+            { name: "Python", level: 90 },
+            { name: "R", level: 85 },
+            { name: "JavaScript", level: 80 },
+            { name: "HTML/CSS", level: 85 }
+        ]
+    },
+    {
+        name: "Libraries/Frameworks",
+        skills: [
+            { name: "TensorFlow", level: 85 },
+            { name: "Scikit-Learn", level: 90 },
+            { name: "Flask", level: 80 },
+            { name: "React", level: 75 }
+        ]
+    }
+];
+function initializeSkills() {
+    const skillsContainer = document.querySelector('.skills-container');
+    skillsContainer.innerHTML = '';
+    skillCategories.forEach(category => {
+        const categoryElement = document.createElement('div');
+        categoryElement.className = 'skill-category';
+        categoryElement.innerHTML = `
+            <h3>${category.name}</h3>
+            <div class="skill-bars">
+                ${category.skills.map(skill => `
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="${skill.level}"></div>
+                        <div class="skill-info">${skill.name} - ${skill.level}%</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        skillsContainer.appendChild(categoryElement);
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.skill-progress').forEach(bar => {
+                    const level = bar.getAttribute('data-level');
+                    bar.style.width = `${level}%`;
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.skill-category').forEach(category => observer.observe(category));
+}
+
+// Mobile Navigation
+function initializeMobileNav() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        hamburger.innerHTML = navLinks.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    });
+}
+
+// Scroll-Based Active Link
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        const scroll = window.scrollY;
+        
+        if (scroll >= sectionTop && scroll < sectionTop + sectionHeight) {
+            const targetLink = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+            navLinks.forEach(link => link.classList.remove('active'));
+            if (targetLink) {
+                targetLink.classList.add('active');
+            }
+        }
+    });
+}
+
+// Initialize Page
+document.addEventListener('DOMContentLoaded', () => {
+    typeWriter();
+    initializeSkills();
+    initializeMobileNav();
+
+    // Populate projects
+    const projectsGrid = document.querySelector('.projects-grid');
+    projects.forEach(project => projectsGrid.appendChild(createProjectCard(project)));
+
+    // Set up scrolling effects
+    window.addEventListener('scroll', updateActiveNavLink);
+});
+
+</script>
+</body>
+</html>
